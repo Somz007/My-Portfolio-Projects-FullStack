@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semeshan — Full-Stack Portfolio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0f0f13;
+      color: #e8e8f0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 680px; width: 100%; }
+    .header { margin-bottom: 2.5rem; }
+    .header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .header h1 span { color: #7c6af7; }
+    .header p { color: #7a7a96; font-size: 0.95rem; line-height: 1.6; }
+    .projects { display: flex; flex-direction: column; gap: 1rem; }
+    .card {
+      background: #1a1a22;
+      border: 1px solid #2e2e3a;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-decoration: none;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .card:hover { border-color: #7c6af7; transform: translateY(-1px); }
+    .card-left { display: flex; align-items: center; gap: 1rem; }
+    .card-icon { font-size: 1.75rem; flex-shrink: 0; }
+    .card-info h2 { font-size: 1rem; font-weight: 700; color: #e8e8f0; margin-bottom: 0.2rem; }
+    .card-info p { font-size: 0.82rem; color: #7a7a96; }
+    .card-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 99px;
+      background: rgba(124,106,247,0.15);
+      color: #7c6af7;
+      flex-shrink: 0;
+    }
+    .footer { margin-top: 2rem; text-align: center; font-size: 0.8rem; color: #4a4a5a; }
+    .footer a { color: #7a7a96; text-decoration: none; }
+    .footer a:hover { color: #7c6af7; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Semeshan — <span>Full-Stack Projects</span></h1>
+      <p>Six production-style projects covering REST APIs, the MERN stack, authentication, data engineering, real-time systems, and mobile development.</p>
+    </div>
+
+    <div class="projects">
+      <a class="card" href="./auth-system/">
+        <div class="card-left">
+          <div class="card-icon">🔐</div>
+          <div class="card-info">
+            <h2>Authentication System</h2>
+            <p>Node.js · Express · JWT · bcrypt · Nodemailer</p>
+          </div>
+        </div>
+        <span class="card-badge">Live Demo</span>
+      </a>
+
+      <a class="card" href="./mern-blog/">
+        <div class="card-left">
+          <div class="card-icon">📝</div>
+          <div class="card-info">
+            <h2>MERN Blog Platform</h2>
+            <p>MongoDB · Express · React · Node.js</p>
+          </div>
+        </div>
+        <span class="card-badge">Live Demo</span>
+      </a>
+
+      <a class="card" href="./chat-app/">
+        <div class="card-left">
+          <div class="card-icon">💬</div>
+          <div class="card-info">
+            <h2>Real-Time Chat App</h2>
+            <p>Socket.io · Express · React</p>
+          </div>
+        </div>
+        <span class="card-badge">Live Demo</span>
+      </a>
+    </div>
+
+    <div class="footer">
+      <a href="https://github.com/Somz007/My-Portfolio-Projects-FullStack" target="_blank">GitHub Repository</a>
+      &nbsp;·&nbsp;
+      <a href="https://somz007.github.io/My-Portfolio-Projects-React/" target="_blank">React Portfolio</a>
+    </div>
+  </div>
+</body>
+</html>
