@@ -99,6 +99,19 @@ The full JS bundle compiles cleanly via `npx expo export --platform android` (Me
 
 ---
 
+## 📝 What I Learned
+
+- Translating **React web knowledge to React Native** — same hooks and component model, but native primitives (`View`, `Text`, `TouchableOpacity`) instead of HTML
+- **Styling without CSS** — building layouts with `StyleSheet.create()` and Flexbox in JS
+- **File-based navigation** with Expo Router, including grouped routes (`(tabs)/`) and a bottom tab bar
+- **Offline-first persistence** with AsyncStorage — and why every read/write must be `await`ed
+- Sharing state across screens with **React Context** instead of prop-drilling
+- Native UX patterns — `Alert.alert()` for confirmations, `KeyboardAvoidingView` so the keyboard never covers inputs, long-press to delete
+- Computing **derived data** (category totals, monthly breakdowns, averages) from a single source array
+- Verifying a mobile bundle compiles via `expo export` without needing a physical device
+
+---
+
 ## 📄 License
 
 MIT — part of my full-stack portfolio (Phase 3).
