@@ -19,7 +19,7 @@ This repository is **Phase 3** of my developer portfolio — a focused push from
 | 1 | [Task Manager API](./task-manager-api) | — | Node.js · Express · MongoDB · JWT · Jest | REST API design with **52 automated tests** (Jest + Supertest) |
 | 2 | [MERN Blog Platform](./mern-blog) | [🔗 Live](https://somz007.github.io/My-Portfolio-Projects-FullStack/mern-blog/) | MongoDB · Express · React · Node | Full-stack wiring with **Axios silent-refresh** auth |
 | 3 | [Data Dashboard](./data-dashboard) | — | Flask · Pandas · Chart.js | **Python data processing** from a live public API |
-| 4 | [Authentication System](./auth-system) | [🔗 Live](https://somz007.github.io/My-Portfolio-Projects-FullStack/) | Node · JWT · bcrypt · Nodemailer | **Email verification, password reset, rate limiting** |
+| 4 | [Authentication System](./auth-system) | [🔗 Live](https://somz007.github.io/My-Portfolio-Projects-FullStack/auth-system/) | Node · JWT · bcrypt · Nodemailer | **Email verification, password reset, rate limiting** |
 | 5 | [Real-Time Chat](./chat-app) | [🔗 Live](https://somz007.github.io/My-Portfolio-Projects-FullStack/chat-app/) | Socket.io · React · Express | **WebSockets** — rooms, broadcasting, typing indicators |
 | 6 | [Expense Tracker](./expense-tracker) | — | React Native · Expo · AsyncStorage | **Mobile (Android)** with offline-first persistence |
 

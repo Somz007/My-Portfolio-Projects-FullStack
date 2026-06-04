@@ -7,7 +7,7 @@ import './index.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.PROD ? '/My-Portfolio-Projects-FullStack/auth-system' : '/'}>
       <AuthProvider>
         <App />
       </AuthProvider>

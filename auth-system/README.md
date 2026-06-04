@@ -6,7 +6,7 @@ A React frontend provides the full user journey — sign up, verify your email, 
 
 ## 🚀 Live Demo
 
-**Frontend:** https://somz007.github.io/My-Portfolio-Projects-FullStack/
+**Frontend:** https://somz007.github.io/My-Portfolio-Projects-FullStack/auth-system/
 **Backend API:** https://auth-system-backend-somz007.onrender.com
 
 ---

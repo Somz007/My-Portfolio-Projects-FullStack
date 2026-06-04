@@ -1,13 +1,13 @@
 {
   "name": "auth-system-frontend",
   "version": "1.0.0",
-  "homepage": "https://somz007.github.io/My-Portfolio-Projects-FullStack/",
+  "homepage": "https://somz007.github.io/My-Portfolio-Projects-FullStack/auth-system/",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist --add --dest auth-system"
   },
   "dependencies": {
     "axios": "^1.7.2",
