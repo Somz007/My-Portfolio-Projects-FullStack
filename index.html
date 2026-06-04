@@ -3,103 +3,189 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Semeshan — Full-Stack Portfolio</title>
+  <meta name="description" content="Six full-stack portfolio projects by Semeshan — REST API, MERN stack, auth system, data dashboard, real-time chat, and React Native." />
+  <title>Full-Stack Portfolio — Semeshan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #0B0B12;
+      --surface: #14141F;
+      --border:  #24243A;
+      --text:    #ECEAF4;
+      --muted:   #7C7C97;
+    }
     body {
-      background: #0f0f13;
-      color: #e8e8f0;
-      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
+      line-height: 1.6;
+      background-image: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(120,90,220,0.10), transparent 70%);
     }
-    .container { max-width: 680px; width: 100%; }
-    .header { margin-bottom: 2.5rem; }
-    .header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.4rem; }
-    .header h1 span { color: #7c6af7; }
-    .header p { color: #7a7a96; font-size: 0.95rem; line-height: 1.6; }
-    .projects { display: flex; flex-direction: column; gap: 1rem; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 80px 24px 64px; }
+
+    /* ── Header ── */
+    header { margin-bottom: 56px; }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 16px;
+    }
+    h1 { font-size: clamp(32px, 6vw, 52px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+    .lede { color: var(--muted); font-size: 17px; margin-top: 16px; max-width: 560px; }
+    .links { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .links a {
+      font-family: 'JetBrains Mono', monospace; font-size: 13px;
+      color: var(--text); text-decoration: none;
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 16px; transition: border-color .2s, background .2s;
+    }
+    .links a:hover { border-color: var(--muted); background: var(--surface); }
+
+    /* ── Grid ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+
+    /* ── Card ── */
     .card {
-      background: #1a1a22;
-      border: 1px solid #2e2e3a;
-      border-radius: 10px;
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      text-decoration: none;
-      transition: border-color 0.15s, transform 0.15s;
+      position: relative; display: flex; flex-direction: column;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px; text-decoration: none; color: inherit;
+      transition: transform .25s cubic-bezier(0.16,1,0.3,1), border-color .25s;
+      overflow: hidden;
     }
-    .card:hover { border-color: #7c6af7; transform: translateY(-1px); }
-    .card-left { display: flex; align-items: center; gap: 1rem; }
-    .card-icon { font-size: 1.75rem; flex-shrink: 0; }
-    .card-info h2 { font-size: 1rem; font-weight: 700; color: #e8e8f0; margin-bottom: 0.2rem; }
-    .card-info p { font-size: 0.82rem; color: #7a7a96; }
-    .card-badge {
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 0.25rem 0.65rem;
-      border-radius: 99px;
-      background: rgba(124,106,247,0.15);
-      color: #7c6af7;
-      flex-shrink: 0;
+    .card::before {
+      content: ''; position: absolute; inset: 0 0 auto 0; height: 3px;
+      background: var(--accent); opacity: 0; transition: opacity .25s;
     }
-    .footer { margin-top: 2rem; text-align: center; font-size: 0.8rem; color: #4a4a5a; }
-    .footer a { color: #7a7a96; text-decoration: none; }
-    .footer a:hover { color: #7c6af7; }
+    .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .card:hover::before { opacity: 1; }
+    .num {
+      font-family: 'JetBrains Mono', monospace; font-size: 13px;
+      color: var(--accent); font-weight: 500;
+    }
+    .card h2 { font-size: 21px; font-weight: 700; margin: 12px 0 8px; }
+    .card p { color: var(--muted); font-size: 14px; flex: 1; }
+    .stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 16px; }
+    .stack span {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--muted); border: 1px solid var(--border);
+      border-radius: 999px; padding: 3px 10px;
+    }
+    .go { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 500; }
+
+    /* ── No-demo card ── */
+    .card-nodemo {
+      opacity: 0.6; cursor: default; pointer-events: none;
+    }
+    .card-nodemo:hover { transform: none; border-color: var(--border); }
+    .card-nodemo:hover::before { opacity: 0; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border);
+      color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 13px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    footer a { color: var(--text); text-decoration: none; }
+    footer a:hover { color: var(--muted); }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Semeshan — <span>Full-Stack Projects</span></h1>
-      <p>Six production-style projects covering REST APIs, the MERN stack, authentication, data engineering, real-time systems, and mobile development.</p>
-    </div>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Full-Stack Portfolio</p>
+      <h1>Six projects,<br>full-stack to mobile.</h1>
+      <p class="lede">
+        REST APIs, the MERN stack, auth systems, data engineering,
+        real-time WebSockets, and React Native — each project built end-to-end.
+      </p>
+      <div class="links">
+        <a href="https://github.com/Somz007/My-Portfolio-Projects-FullStack" target="_blank" rel="noopener">GitHub Repo</a>
+        <a href="https://github.com/Somz007" target="_blank" rel="noopener">@Somz007</a>
+      </div>
+    </header>
 
-    <div class="projects">
-      <a class="card" href="./auth-system/">
-        <div class="card-left">
-          <div class="card-icon">🔐</div>
-          <div class="card-info">
-            <h2>Authentication System</h2>
-            <p>Node.js · Express · JWT · bcrypt · Nodemailer</p>
-          </div>
+    <main class="grid">
+
+      <!-- Project 01 -->
+      <div class="card card-nodemo" style="--accent:#22c55e;">
+        <span class="num">Project 01</span>
+        <h2>Task Manager API</h2>
+        <p>RESTful API with JWT auth, refresh-token rotation, pagination, search, and 52 automated tests.</p>
+        <div class="stack">
+          <span>Node.js</span><span>Express</span><span>MongoDB</span><span>Jest</span>
         </div>
-        <span class="card-badge">Live Demo</span>
+        <span class="go">API only — no frontend</span>
+      </div>
+
+      <!-- Project 02 -->
+      <a class="card" href="./mern-blog/" style="--accent:#38bdf8;">
+        <span class="num">Project 02</span>
+        <h2>MERN Blog Platform</h2>
+        <p>Full-stack blog with posts, likes, comments, silent JWT refresh, and protected routes.</p>
+        <div class="stack">
+          <span>MongoDB</span><span>Express</span><span>React</span><span>Node.js</span>
+        </div>
+        <span class="go">Open live demo →</span>
       </a>
 
-      <a class="card" href="./mern-blog/">
-        <div class="card-left">
-          <div class="card-icon">📝</div>
-          <div class="card-info">
-            <h2>MERN Blog Platform</h2>
-            <p>MongoDB · Express · React · Node.js</p>
-          </div>
+      <!-- Project 03 -->
+      <div class="card card-nodemo" style="--accent:#f59e0b;">
+        <span class="num">Project 03</span>
+        <h2>Data Dashboard</h2>
+        <p>Live World Bank economic data — Pandas pipelines, in-memory cache, retry + fallback strategy.</p>
+        <div class="stack">
+          <span>Flask</span><span>Pandas</span><span>Chart.js</span>
         </div>
-        <span class="card-badge">Live Demo</span>
+        <span class="go">Python — run locally</span>
+      </div>
+
+      <!-- Project 04 -->
+      <a class="card" href="./auth-system/" style="--accent:#a78bfa;">
+        <span class="num">Project 04</span>
+        <h2>Authentication System</h2>
+        <p>Email verification, password reset, account lockout, rate limiting, and session invalidation.</p>
+        <div class="stack">
+          <span>Node.js</span><span>JWT</span><span>bcrypt</span><span>Nodemailer</span>
+        </div>
+        <span class="go">Open live demo →</span>
       </a>
 
-      <a class="card" href="./chat-app/">
-        <div class="card-left">
-          <div class="card-icon">💬</div>
-          <div class="card-info">
-            <h2>Real-Time Chat App</h2>
-            <p>Socket.io · Express · React</p>
-          </div>
+      <!-- Project 05 -->
+      <a class="card" href="./chat-app/" style="--accent:#f472b6;">
+        <span class="num">Project 05</span>
+        <h2>Real-Time Chat App</h2>
+        <p>Named rooms, live presence, typing indicators, and room history — all over WebSockets.</p>
+        <div class="stack">
+          <span>Socket.io</span><span>Express</span><span>React</span>
         </div>
-        <span class="card-badge">Live Demo</span>
+        <span class="go">Open live demo →</span>
       </a>
-    </div>
 
-    <div class="footer">
-      <a href="https://github.com/Somz007/My-Portfolio-Projects-FullStack" target="_blank">GitHub Repository</a>
-      &nbsp;·&nbsp;
-      <a href="https://somz007.github.io/My-Portfolio-Projects-React/" target="_blank">React Portfolio</a>
-    </div>
+      <!-- Project 06 -->
+      <div class="card card-nodemo" style="--accent:#34d399;">
+        <span class="num">Project 06</span>
+        <h2>Expense Tracker</h2>
+        <p>Android expense tracker with offline-first AsyncStorage, category stats, and dark theme.</p>
+        <div class="stack">
+          <span>React Native</span><span>Expo</span><span>AsyncStorage</span>
+        </div>
+        <span class="go">Mobile — run with Expo Go</span>
+      </div>
+
+    </main>
+
+    <footer>
+      <span>Built by <a href="https://github.com/Somz007" target="_blank" rel="noopener">Semeshan</a></span>
+      <span>
+        <a href="https://somz007.github.io/My-Portfolio-Projects-JavaScript/" target="_blank" rel="noopener">JS Portfolio</a>
+        &nbsp;·&nbsp;
+        <a href="https://somz007.github.io/My-Portfolio-Projects-React/" target="_blank" rel="noopener">React Portfolio</a>
+      </span>
+    </footer>
   </div>
 </body>
 </html>
