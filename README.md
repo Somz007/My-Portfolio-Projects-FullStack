@@ -4,6 +4,8 @@
 
 **Author:** [@Somz007](https://github.com/Somz007) · **Stack:** Node.js · Express · MongoDB · React · React Native · Flask · Pandas · Socket.io
 
+**🌐 Live Portfolio:** https://somz007.github.io/My-Portfolio-Projects-FullStack/
+
 ---
 
 ## 📌 Overview
