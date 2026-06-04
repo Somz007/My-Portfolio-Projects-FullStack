@@ -4,6 +4,11 @@ A complete, production-style authentication system covering every security layer
 
 A React frontend provides the full user journey — sign up, verify your email, log in, and reset a forgotten password — all backed by a hardened Express API.
 
+## 🚀 Live Demo
+
+**Frontend:** https://somz007.github.io/My-Portfolio-Projects-FullStack/
+**Backend API:** https://auth-system-backend-somz007.onrender.com
+
 ---
 
 ## ✨ Features
