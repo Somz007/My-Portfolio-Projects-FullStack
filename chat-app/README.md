@@ -1,6 +1,13 @@
 # Real-Time Chat App
 
-A real-time chat application where multiple users join named rooms and message each other live. Built with **Socket.io**, **Express**, and **React** — messages, presence, and typing indicators all update instantly across every connected client, with no page refreshes or polling.
+A real-time chat application where multiple users join named rooms and message each other live.
+
+## 🚀 Live Demo
+
+**Frontend:** https://somz007.github.io/My-Portfolio-Projects-FullStack/chat-app/
+**Backend API:** https://chat-app-backend-somz007.onrender.com
+
+> Open in two browser tabs with different usernames to chat in real time. Built with **Socket.io**, **Express**, and **React** — messages, presence, and typing indicators all update instantly across every connected client, with no page refreshes or polling.
 
 ---
 

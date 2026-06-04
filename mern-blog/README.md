@@ -2,6 +2,11 @@
 
 A full-stack blog platform where users can register, write posts, like, and comment — built with the **MERN stack** (MongoDB, Express, React, Node.js).
 
+## 🚀 Live Demo
+
+**Frontend:** https://somz007.github.io/My-Portfolio-Projects-FullStack/mern-blog/
+**Backend API:** https://mern-blog-backend-somz007.onrender.com
+
 A React frontend talks to a Node/Express API over HTTP, with JWT authentication, protected routes, and per-user data ownership throughout.
 
 ---
