@@ -6,7 +6,17 @@ const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5174', credentials: true }));
+// Allow both local dev (localhost:5174) and production (GitHub Pages)
+const allowedOrigins = [
+  'http://localhost:5174',
+  'https://somz007.github.io',
+  process.env.CLIENT_URL,
+].filter(Boolean);
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 app.use(express.json());
 if (process.env.NODE_ENV !== 'production') app.use(morgan('dev'));
 

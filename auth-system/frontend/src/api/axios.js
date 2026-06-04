@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-const api = axios.create({ baseURL: '/api' });
+// In production (GitHub Pages), use the Render backend URL.
+// In development, use the local proxy (/api → localhost:5002).
+const baseURL = import.meta.env.PROD
+  ? 'https://auth-system-backend-somz007.onrender.com/api'
+  : '/api';
+
+const api = axios.create({ baseURL });
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('accessToken');
