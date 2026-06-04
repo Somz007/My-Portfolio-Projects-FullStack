@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}World Data Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  {# ── Controls ────────────────────────────────────────────── #}
+  <section class="controls-bar">
+    <div class="control-group">
+      <label for="indicatorSelect">Indicator</label>
+      <select id="indicatorSelect" class="select">
+        {% for ind in indicators %}
+          <option value="{{ ind.id }}" {% if ind.id == 'NY.GDP.MKTP.CD' %}selected{% endif %}>
+            {{ ind.label }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="yearsSelect">History</label>
+      <select id="yearsSelect" class="select">
+        <option value="10">10 years</option>
+        <option value="20" selected>20 years</option>
+        <option value="30">30 years</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="countrySelect">Primary Country</label>
+      <select id="countrySelect" class="select">
+        {% for c in countries %}
+          <option value="{{ c.id }}" {% if c.id == 'ZAF' %}selected{% endif %}>
+            {{ c.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="control-group compare-group">
+      <label>Compare With (up to 3)</label>
+      <div class="checkbox-grid">
+        {% for c in countries %}
+          {% if c.id != 'ZAF' %}
+            <label class="checkbox-label">
+              {# Pre-check three interesting comparators #}
+              <input type="checkbox" class="compare-check" value="{{ c.id }}"
+                {% if c.id in ['NGA', 'KEN', 'BRA'] %}checked{% endif %} />
+              {{ c.name }}
+            </label>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <button id="loadBtn" class="btn btn-primary">Refresh Charts</button>
+  </section>
+
+  {# ── Status banner #}
+  <div id="statusBanner" class="status-banner hidden"></div>
+
+  {# ── Stat cards ──────────────────────────────────────────── #}
+  <section id="statsSection" class="stats-row hidden">
+    <div class="stat-card" id="statLatest">
+      <div class="stat-label">Latest Value</div>
+      <div class="stat-value" id="statLatestVal">—</div>
+      <div class="stat-sub" id="statLatestYear"></div>
+    </div>
+    <div class="stat-card" id="statMean">
+      <div class="stat-label">Period Average</div>
+      <div class="stat-value" id="statMeanVal">—</div>
+    </div>
+    <div class="stat-card" id="statMin">
+      <div class="stat-label">Period Low</div>
+      <div class="stat-value" id="statMinVal">—</div>
+    </div>
+    <div class="stat-card" id="statMax">
+      <div class="stat-label">Period High</div>
+      <div class="stat-value" id="statMaxVal">—</div>
+    </div>
+  </section>
+
+  {# ── Charts ───────────────────────────────────────────────── #}
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h2 class="chart-title" id="lineTitle">Time Series</h2>
+      <div class="chart-wrap">
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div id="lineSpinner" class="spinner-wrap"><div class="spinner"></div></div>
+    </div>
+
+    <div class="chart-card">
+      <h2 class="chart-title" id="barTitle">Country Comparison</h2>
+      <div class="chart-wrap">
+        <canvas id="barChart"></canvas>
+      </div>
+      <div id="barSpinner" class="spinner-wrap"><div class="spinner"></div></div>
+    </div>
+  </div>
+
+  {# ── Growth rate chart (full width) ──────────────────────── #}
+  <div class="chart-card chart-card-wide">
+    <h2 class="chart-title" id="growthTitle">Year-over-Year Growth Rate (%)</h2>
+    <div class="chart-wrap chart-wrap-short">
+      <canvas id="growthChart"></canvas>
+    </div>
+    <div id="growthSpinner" class="spinner-wrap"><div class="spinner"></div></div>
+  </div>
+
+  {# ── Data table ───────────────────────────────────────────── #}
+  <div class="chart-card chart-card-wide">
+    <h2 class="chart-title">Raw Data
+      <span class="chart-subtitle">(processed by Pandas · dropna · sort · pct_change)</span>
+    </h2>
+    <div class="table-wrap">
+      <table id="dataTable" class="data-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th id="tableValueHeader">Value</th>
+            <th>YoY Growth</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr><td colspan="3" class="table-empty">Select a country and click Refresh Charts</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
