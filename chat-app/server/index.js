@@ -22,9 +22,14 @@ const http    = require('http');
 const cors    = require('cors');
 const { Server } = require('socket.io');
 
-const PORT               = process.env.PORT        || 5003;
-const CLIENT_URL         = process.env.CLIENT_URL  || 'http://localhost:5175';
-const HISTORY_LIMIT      = Number(process.env.ROOM_HISTORY_LIMIT) || 50;
+const PORT          = process.env.PORT || 5003;
+const HISTORY_LIMIT = Number(process.env.ROOM_HISTORY_LIMIT) || 50;
+
+const allowedOrigins = [
+  'http://localhost:5175',
+  'https://somz007.github.io',
+  process.env.CLIENT_URL,
+].filter(Boolean);
 
 // ── Available rooms ───────────────────────────────────────────
 // Pre-defined rooms users can join. In a production app these would
@@ -41,7 +46,8 @@ const socketUsers = new Map();
 const app    = express();
 const server = http.createServer(app); // Socket.io needs the raw http.Server
 
-app.use(cors({ origin: CLIENT_URL }));
+app.set('trust proxy', 1);
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
 // REST endpoint: list rooms with live user counts (used on the join screen)
@@ -60,7 +66,7 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 // We pass cors config here too — Socket.io has its own CORS handling
 // separate from Express.
 const io = new Server(server, {
-  cors: { origin: CLIENT_URL, methods: ['GET', 'POST'] },
+  cors: { origin: allowedOrigins, methods: ['GET', 'POST'] },
 });
 
 // ── Helper: build a message object ───────────────────────────

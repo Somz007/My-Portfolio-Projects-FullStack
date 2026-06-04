@@ -6,6 +6,8 @@ const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 // Allow both local dev (localhost:5174) and production (GitHub Pages)
 const allowedOrigins = [
   'http://localhost:5174',

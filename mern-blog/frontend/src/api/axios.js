@@ -15,9 +15,11 @@
 // ─────────────────────────────────────────────────────────────
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: '/api', // Vite's proxy forwards /api → http://localhost:5000/api
-});
+const baseURL = import.meta.env.PROD
+  ? 'https://mern-blog-backend-somz007.onrender.com/api'
+  : '/api';
+
+const api = axios.create({ baseURL });
 
 // ── REQUEST interceptor ──────────────────────────────────────
 // Runs before every outgoing request.
@@ -72,7 +74,7 @@ api.interceptors.response.use(
 
       try {
         // Call refresh WITHOUT the interceptor (use plain axios to avoid loops).
-        const { data } = await axios.post('/api/auth/refresh', { refreshToken });
+        const { data } = await axios.post(`${baseURL}/auth/refresh`, { refreshToken });
         localStorage.setItem('accessToken', data.accessToken);
         localStorage.setItem('refreshToken', data.refreshToken);
         api.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;

@@ -7,8 +7,10 @@ export default function JoinForm({ onJoin }) {
   const [error,    setError]    = useState('');
 
   useEffect(() => {
-    // Fetch live room list + user counts from the REST endpoint.
-    fetch('/api/rooms')
+    const apiBase = import.meta.env.PROD
+      ? 'https://chat-app-backend-somz007.onrender.com'
+      : '';
+    fetch(`${apiBase}/api/rooms`)
       .then((r) => r.json())
       .then(setRooms)
       .catch(() => setRooms([{ name: 'general', userCount: 0 }]));

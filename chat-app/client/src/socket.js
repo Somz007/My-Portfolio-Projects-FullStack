@@ -9,10 +9,14 @@
 // ─────────────────────────────────────────────────────────────
 import { io } from 'socket.io-client';
 
-const socket = io({
-  autoConnect: false, // connect manually after user fills in the join form
-  // In dev, Vite's proxy forwards /socket.io → localhost:5003.
-  // In production you'd pass the server URL here explicitly.
+// In production (GitHub Pages), connect directly to the Render backend.
+// In dev, pass no URL — Vite's proxy forwards /socket.io → localhost:5003.
+const BACKEND_URL = import.meta.env.PROD
+  ? 'https://chat-app-backend-somz007.onrender.com'
+  : undefined;
+
+const socket = io(BACKEND_URL, {
+  autoConnect: false,
 });
 
 export default socket;
